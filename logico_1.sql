@@ -1,62 +1,54 @@
-/* Lógico_2: */
+﻿/* Lógico_1: */
 
 CREATE TABLE ESCOLA (
     cnpj INTEGER PRIMARY KEY UNIQUE,
-    nome_escola CHARACTER,
-    cidade CHARACTER,
-    telefone VARCHAR,
-    endereco VARCHAR
+    nome_escola CHARACTER NOT NULL,
+    cidade CHARACTER NOT NULL,
+    telefone VARCHAR NOT NULL,
+    endereco VARCHAR NOT NULL
 );
 
 CREATE TABLE TURMA (
     codigo INTEGER PRIMARY KEY,
-    nome VARCHAR,
-    turno CHARACTER,
-    id_disciplina INTEGER
+    nome VARCHAR NOT NULL,
+    turno CHARACTER NOT NULL,
+    id_disciplina INTEGER NOT NULL
 );
 
 CREATE TABLE PROFESSOR (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    nome VARCHAR,
-    id_disciplina INTEGER,
-    telefone VARCHAR,
-    email VARCHAR
+    nome VARCHAR NOT NULL,
+    id_disciplina INTEGER NOT NULL,
+    telefone VARCHAR NOT NULL,
+    email VARCHAR NOT NULL
 );
 
 CREATE TABLE DISCIPLINA (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    nome VARCHAR,
-    id_professor INTEGER
+    nome VARCHAR NOT NULL,
+    id_professor INTEGER NOT NULL
 );
 
 CREATE TABLE ALUNO (
     cpf INTEGER PRIMARY KEY,
-    nome VARCHAR,
-    dt_nascimento DATE,
-    idade INTEGER,
-    cd_turma VARCHAR,
-    id_mae INTEGER,
-    id_pai INTEGER,
+    nome VARCHAR NOT NULL,
+    dt_nascimento DATE NOT NULL,
+    idade INTEGER NOT NULL,
+    cd_turma VARCHAR NOT NULL,
+    id_resp INTEGER NOT NULL,
     FOREIGN KEY (cd_turma) REFERENCES TURMA (codigo),
-    FOREIGN KEY (id_mae) REFERENCES MAE (id),
-    FOREIGN KEY (id_pai) REFERENCES PAI (id)
+    FOREIGN KEY (id_resp) REFERENCES RESPONSAVEL (id),
+    
 );
 
-CREATE TABLE MAE (
+CREATE TABLE RESPONSAVEL (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    cpf INTEGER,
-    rg INTEGER,
-    nome VARCHAR,
-    dt_nascimento DATE
+    cpf INTEGER NOT NULL,
+    rg INTEGER NOT NULL,
+    nome VARCHAR NOT NULL,
+    dt_nascimento DATE NOT NULL
 );
 
-CREATE TABLE PAI (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    cpf INTEGER,
-    rg INTEGER,
-    nome VARCHAR,
-    dt_nascimento DATE
-);
  
 ALTER TABLE TURMA ADD CONSTRAINT FK_TURMA_2
     FOREIGN KEY (id_disciplina)
