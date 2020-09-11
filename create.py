@@ -51,7 +51,15 @@ def create_sql(conn, cur):
     rg INTEGER (7) NOT NULL,
     nome VARCHAR (50) NOT NULL,
     dt_nascimento DATE NOT NULL);''')
-    conn.commit() # M #
+    conn.commit()
+
+    cur.execute('''CREATE TABLE RESPONSAVEL (
+    id INTEGER (2) PRIMARY KEY,
+    cpf INTEGER (11) NOT NULL,
+    rg INTEGER (7) NOT NULL,
+    nome VARCHAR (50) NOT NULL,
+    dt_nascimento DATE NOT NULL);''')
+    conn.commit()
 
 
 def insert_sql(conn, cur): #FUNCAO INSERIR
@@ -91,14 +99,4 @@ def insert_sql(conn, cur): #FUNCAO INSERIR
  
     conn.commit()
 
-create_sql(conn, cur)
-
-insert_sql(conn, cur)
-
-print ('Dados inseridos com sucesso!')
-
 conn.close()
-
-input ('Digite algo para sair: ')
-exit()
-
